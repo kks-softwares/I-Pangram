@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Hello from './Test/Hello';
+import Summary from './Test/Summary';
+import { useState } from 'react';
 
 function App() {
+
+  const [inputList, setInputList] = useState([{
+    inputText: "",
+    diagnosed: "",
+    physical: "",
+    mental: "",
+    experience: "",
+    checking_relevant: {
+      Not_Relevant: "",
+      lying_down: "",
+      when_sitting: "",
+      under_sitting: "",
+      in_walking: ""
+    }
+  }]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Hello inputList={inputList} setInputList={setInputList} />}></Route>
+          <Route exact path="/SummaryPage" element={<Summary inputList={inputList} setInputList={setInputList} />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
